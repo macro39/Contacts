@@ -1,5 +1,6 @@
 [versions]
 agp = "8.4.0"
+hiltNavigationFragment = "1.2.0"
 kotlin = "1.9.23"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -13,10 +14,21 @@ lifecycleViewmodelKtx = "2.8.1"
 navigationFragmentKtx = "2.7.7"
 navigationUiKtx = "2.7.7"
 androidxComposeBom = "2024.05.00"
+roomRuntime = "2.6.1"
 uiAndroid = "1.6.7"
+hiltVersion = "2.48"
+hiltComposeNavigationVersion = "1.0.0"
+ksp = "1.9.0-1.0.12"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hiltNavigationFragment" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
+androidx-room-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -30,8 +42,12 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
 androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 androidx-material3 = { module = "androidx.compose.material3:material3" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVersion" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltVersion" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltComposeNavigationVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
