@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/contactsFragment">
+
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.macek.contacts.ui.contacts.ContactsFragment"
+        android:label="@string/contacts" />
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.macek.contacts.ui.favorites.FavoritesFragment"
+        android:label="@string/favorites" />
+
+</navigation>
