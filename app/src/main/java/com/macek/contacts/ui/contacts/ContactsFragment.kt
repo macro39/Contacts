@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ContactsFragment : Fragment() {
 
     override fun onCreateView(
@@ -16,7 +18,14 @@ class ContactsFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                ContactsScreen()
+                ContactsScreen(
+                    onAddContact = {
+                        // TODO implement
+                    },
+                    onShowContactDetail = {
+                        // TODO implement
+                    }
+                )
             }
         }
     }

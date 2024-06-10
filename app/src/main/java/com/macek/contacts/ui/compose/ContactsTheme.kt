@@ -5,10 +5,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
 
 private val LightColorScheme = lightColorScheme()
 
 private val DarkColorScheme = darkColorScheme()
+
+val LocalSpacing = staticCompositionLocalOf { spacing }
 
 @Composable
 fun ContactsTheme(
@@ -21,7 +26,18 @@ fun ContactsTheme(
     }
 
     MaterialTheme(
-        colorScheme = colors,
-        content = content
-    )
+        colorScheme = colors
+    ) {
+        CompositionLocalProvider(
+            LocalSpacing provides spacing,
+            content = content,
+        )
+    }
+}
+
+object ContactsAppTheme {
+    val spacing: Spacing
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalSpacing.current
 }
