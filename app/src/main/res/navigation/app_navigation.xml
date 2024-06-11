@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/contactsFragment">
+
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.macek.contacts.ui.contacts.ContactsFragment"
+        android:label="@string/contacts">
+
+        <action
+            android:id="@+id/action_contactsFragment_to_addOrEditContactFragment"
+            app:destination="@id/addOrEditContactFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.macek.contacts.ui.favorites.FavoritesFragment"
+        android:label="@string/favorites">
+
+        <action
+            android:id="@+id/action_favoritesFragment_to_addOrEditContactFragment"
+            app:destination="@id/addOrEditContactFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/addOrEditContactFragment"
+        android:name="com.macek.contacts.ui.addoreditcontact.AddOrEditContactFragment">
+
+        <argument
+            android:name="contactId"
+            app:argType="integer" />
+
+    </fragment>
+
+</navigation>

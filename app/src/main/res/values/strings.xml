@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Contacts</string>
+    <string name="contacts">Contacts</string>
+    <string name="favorites">Favorites</string>
+
+    <string name="search_contacts">Search contacts</string>
+    <string name="you_do_not_have_any_contacts">You don\'t have any contacts</string>
+    <string name="no_contacts_found_change_your_search_text">No contacts found, change your search text</string>
+
+    <string name="you_do_not_have_any_favorite_contacts">You don\'t have any favorite contacts</string>
+    <string name="favorite_contacts_pattern">Favorite contacts: %d</string>
+    <string name="add_more_favorites">Add more favorites</string>
+    <string name="save_favorites">Save favorites</string>
+
+    <string name="add_new_contact">Add new contact</string>
+    <string name="edit_contact">Edit contact</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="telephone_number">Telephone number</string>
+    <string name="save_contact">Save contact</string>
+    <string name="save_changes">Save changes</string>
+</resources>
