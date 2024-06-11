@@ -33,9 +33,9 @@ fun ContactItem(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = ContactsAppTheme.spacing.s)
-            .background(MaterialTheme.colorScheme.background)
             .border(1.dp, Color.Red, RoundedCornerShape(20.dp))
             .clip(RoundedCornerShape(20.dp))
+            .background(MaterialTheme.colorScheme.background)
             .clickable {
                 onContactClick()
             }

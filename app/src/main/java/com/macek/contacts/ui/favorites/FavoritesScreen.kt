@@ -86,7 +86,10 @@ private fun FavoritesScreen(
                         LazyColumn {
                             stickyHeader {
                                 Text(
-                                    modifier = Modifier.padding(bottom = ContactsAppTheme.spacing.l),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .background(MaterialTheme.colorScheme.background)
+                                        .padding(bottom = ContactsAppTheme.spacing.l),
                                     text = stringResource(id = R.string.favorite_contacts_pattern, state.contacts.size)
                                 )
                             }
