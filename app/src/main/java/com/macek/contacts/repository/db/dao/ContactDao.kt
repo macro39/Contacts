@@ -16,8 +16,11 @@ interface ContactDao {
     @Query("SELECT * FROM Contact")
     fun getAll(): Flow<List<ContactEntity>>
 
-    @Query("SELECT * FROM Contact WHERE isFavorite = 1")
-    fun getAllFavoriteContacts(): Flow<List<ContactEntity>>
+    @Query("SELECT * FROM Contact WHERE isFavorite = :isFavorite")
+    fun getContacts(isFavorite: Boolean): Flow<List<ContactEntity>>
+
+    @Query("UPDATE Contact SET isFavorite = 1 WHERE id in (:ids)")
+    fun setFavorites(ids: List<Int>)
 
     @Query("DELETE from Contact WHERE id = :id")
     fun delete(id: Int)

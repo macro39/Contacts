@@ -15,7 +15,7 @@ interface ContactsViewModelInterface {
 data class State(
     val searchValue: TextFieldValue = TextFieldValue(),
     val contacts: List<Contact> = emptyList(),
-    val emptyStateDescription: String,
+    val emptyStateTitle: String,
 )
 
 sealed class Action {
@@ -23,7 +23,7 @@ sealed class Action {
     data class OnDeleteContact(val id: Int) : Action()
     data class OnChangeFavoriteContact(val id: Int) : Action()
     data object OnAddContact : Action()
-    data class OnShowContactDetail(val id: Int) : Action()
+    data class OnContactClick(val id: Int) : Action()
 }
 
 sealed class Event {

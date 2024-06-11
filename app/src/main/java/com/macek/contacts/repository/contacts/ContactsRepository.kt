@@ -5,7 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface ContactsRepository {
     fun getAllContacts(): Flow<List<Contact>>
-    fun getFavoriteContacts(): Flow<List<Contact>>
+    fun getContacts(isFavorite: Boolean): Flow<List<Contact>>
     fun saveContact(contact: Contact)
+    fun setFavorites(ids: List<Int>)
     fun deleteContact(id: Int)
 }

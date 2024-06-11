@@ -20,7 +20,7 @@ class ContactsRepositoryImpl(
         }
     }
 
-    override fun getFavoriteContacts(): Flow<List<Contact>> = contactDao.getAllFavoriteContacts().map {
+    override fun getContacts(isFavorite: Boolean): Flow<List<Contact>> = contactDao.getContacts(isFavorite).map {
         it.map {
             it.toContact()
         }
@@ -29,6 +29,12 @@ class ContactsRepositoryImpl(
     override fun saveContact(contact: Contact) {
         CoroutineScope(Dispatchers.IO).launch {
             contactDao.upsert(contact.toContactEntity())
+        }
+    }
+
+    override fun setFavorites(ids: List<Int>) {
+        CoroutineScope(Dispatchers.IO).launch {
+            contactDao.setFavorites(ids)
         }
     }
 
