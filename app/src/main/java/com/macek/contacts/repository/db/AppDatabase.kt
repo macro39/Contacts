@@ -8,6 +8,7 @@ import com.macek.contacts.repository.db.entity.ContactEntity
 @Database(
     entities = [ContactEntity::class],
     version = 1,
+    exportSchema = false,
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun contactDao(): ContactDao
