@@ -22,7 +22,7 @@ class ContactsViewModel @Inject constructor(
     private val contactsRepository: ContactsRepository,
 ) : ViewModel(), ContactsViewModelInterface {
 
-    override val state = MutableStateFlow(State(emptyStateDescription = context.getString(R.string.you_do_not_have_any_contacts)))
+    override val state = MutableStateFlow(State(emptyStateTitle = context.getString(R.string.you_do_not_have_any_contacts)))
 
     override val event = Channel<Event>(CONFLATED)
 
@@ -37,7 +37,7 @@ class ContactsViewModel @Inject constructor(
                 }
             }
 
-            is Action.OnShowContactDetail -> {
+            is Action.OnContactClick -> {
                 viewModelScope.launch {
                     event.send(Event.ShowContactDetail(action.id))
                 }
@@ -71,12 +71,12 @@ class ContactsViewModel @Inject constructor(
                     it.lastName.contains(state.searchValue.text, true) ||
                     it.phoneNumber.contains(state.searchValue.text, true)
             }
-            val emptyStateDescription = if (filteredContacts.isEmpty() && state.searchValue.text.isEmpty()) R.string.no_contacts_found_change_your_search_text else R.string.no_contacts_found_change_your_search_text
+            val emptyStateTitle = if (filteredContacts.isEmpty() && state.searchValue.text.isEmpty()) R.string.no_contacts_found_change_your_search_text else R.string.no_contacts_found_change_your_search_text
 
             this.state.emit(
                 state.copy(
                     contacts = filteredContacts,
-                    emptyStateDescription = context.getString(emptyStateDescription),
+                    emptyStateTitle = context.getString(emptyStateTitle),
                 )
             )
         }.launchIn(viewModelScope)

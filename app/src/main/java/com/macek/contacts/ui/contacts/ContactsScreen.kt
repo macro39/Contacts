@@ -2,17 +2,13 @@ package com.macek.contacts.ui.contacts
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,11 +16,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.SwipeToDismissBoxState
@@ -38,14 +32,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.macek.contacts.R
 import com.macek.contacts.repository.contacts.model.Contact
 import com.macek.contacts.ui.compose.ContactsAppTheme
 import com.macek.contacts.ui.compose.ContactsTheme
 import com.macek.contacts.ui.compose.collectWithLifecycle
+import com.macek.contacts.ui.compose.components.ContactItem
+import com.macek.contacts.ui.compose.components.EmptyState
 import kotlinx.coroutines.flow.receiveAsFlow
 
 @Composable
@@ -69,6 +67,7 @@ fun ContactsScreen(
         onAddContact = { viewModel.handleAction(Action.OnAddContact) },
         onDeleteContact = { viewModel.handleAction(Action.OnDeleteContact(it)) },
         onChangeFavoriteContact = { viewModel.handleAction(Action.OnChangeFavoriteContact(it)) },
+        onContactClick = { viewModel.handleAction(Action.OnContactClick(it)) },
     )
 }
 
@@ -79,6 +78,7 @@ private fun ContactsScreen(
     onAddContact: () -> Unit,
     onDeleteContact: (Int) -> Unit,
     onChangeFavoriteContact: (Int) -> Unit,
+    onContactClick: (Int) -> Unit,
 ) {
     ContactsTheme {
         Surface {
@@ -95,38 +95,33 @@ private fun ContactsScreen(
                         value = state.searchValue,
                         onValueChange = onSearchTextChange,
                         maxLines = 1,
+                        placeholder = {
+                            Text(text = stringResource(id = R.string.search_contacts))
+                        }
                     )
                     Spacer(modifier = Modifier.height(ContactsAppTheme.spacing.l))
                     if (state.contacts.isNotEmpty()) {
                         LazyColumn {
-                            items(items = state.contacts, key = { it.id }) {
-                                ContactItem(
+                            items(
+                                items = state.contacts,
+                                key = { it.id }
+                            ) {
+                                ContactSwipeableItem(
                                     item = it,
                                     onDelete = { onDeleteContact(it.id) },
-                                    onFavoriteChange = { onChangeFavoriteContact(it.id) }
+                                    onFavoriteChange = { onChangeFavoriteContact(it.id) },
+                                    onContactClick = { onContactClick(it.id) }
                                 )
                             }
                         }
                     } else {
-                        Column(
-                            modifier = Modifier.fillMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center,
-                        ) {
-                            Icon(
-                                modifier = Modifier.size(40.dp),
-                                imageVector = Icons.Default.Warning,
-                                contentDescription = null
-                            )
-                            Spacer(modifier = Modifier.height(ContactsAppTheme.spacing.l))
-                            Text(text = state.emptyStateDescription)
-                        }
+                        EmptyState(state.emptyStateTitle)
                     }
                 }
                 FloatingActionButton(
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
-                        .padding(ContactsAppTheme.spacing.l),
+                        .padding(ContactsAppTheme.spacing.xl),
                     onClick = { onAddContact() }
                 ) {
                     Icon(Icons.Default.Add, contentDescription = null)
@@ -138,10 +133,11 @@ private fun ContactsScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ContactItem(
+private fun ContactSwipeableItem(
     item: Contact,
     onDelete: () -> Unit,
     onFavoriteChange: () -> Unit,
+    onContactClick: () -> Unit,
 ) {
     val state = rememberSwipeToDismissBoxState(
         confirmValueChange = { value ->
@@ -170,27 +166,10 @@ private fun ContactItem(
             )
         },
         content = {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = ContactsAppTheme.spacing.s)
-                    .background(MaterialTheme.colorScheme.background)
-                    .border(1.dp, Color.Red, RoundedCornerShape(20.dp))
-                    .clip(RoundedCornerShape(20.dp))
-                    .padding(ContactsAppTheme.spacing.s),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Favorite,
-                    contentDescription = null,
-                    tint = if (item.isFavorite) Color.Red else Color.Black
-                )
-                Spacer(modifier = Modifier.width(ContactsAppTheme.spacing.s))
-                Column {
-                    Text(item.fullName)
-                    Text(item.phoneNumber)
-                }
-            }
+            ContactItem(
+                item = item,
+                onContactClick = onContactClick
+            )
         }
     )
 }
@@ -261,11 +240,12 @@ private fun ContactsScreenPreview() {
                     false
                 )
             ),
-            emptyStateDescription = "No data",
+            emptyStateTitle = "No data",
         ),
-        {},
-        {},
-        {},
-        {},
+        onSearchTextChange = {},
+        onAddContact = {},
+        onDeleteContact = {},
+        onChangeFavoriteContact = {},
+        onContactClick = {},
     )
 }

@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoritesFragment : Fragment() {
 
     override fun onCreateView(
@@ -16,7 +18,11 @@ class FavoritesFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                FavoritesScreen()
+                FavoritesScreen(
+                    onShowContactDetail = {
+                        // TODO implement
+                    }
+                )
             }
         }
     }
