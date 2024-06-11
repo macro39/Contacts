@@ -1,4 +1,4 @@
-package com.macek.contacts.ui.addordeditcontact
+package com.macek.contacts.ui.addoreditcontact
 
 import androidx.compose.ui.text.input.TextFieldValue
 import kotlinx.coroutines.channels.Channel

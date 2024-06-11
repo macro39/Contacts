@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.macek.contacts.ui.addordeditcontact.INVALID_CONTACT_ID_ARG
+import com.macek.contacts.ui.addoreditcontact.INVALID_CONTACT_ID_ARG
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

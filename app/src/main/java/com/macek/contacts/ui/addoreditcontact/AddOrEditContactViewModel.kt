@@ -1,4 +1,4 @@
-package com.macek.contacts.ui.addordeditcontact
+package com.macek.contacts.ui.addoreditcontact
 
 import android.content.Context
 import androidx.compose.ui.text.input.TextFieldValue
@@ -143,7 +143,7 @@ class AddOrEditContactViewModel @Inject constructor(
                         (it.telephoneNumberValue.text.isNotBlank() && it.telephoneNumberValue.text != currentContact?.phoneNumber)
 
                     state.emit(
-                        state.value.copy(
+                        it.copy(
                             primaryButtonEnabled = primaryButtonEnabled
                         )
                     )
@@ -163,7 +163,7 @@ class AddOrEditContactViewModel @Inject constructor(
                         it.telephoneNumberValue.text.isNotBlank()
 
                     state.emit(
-                        state.value.copy(
+                        it.copy(
                             primaryButtonEnabled = primaryButtonEnabled
                         )
                     )

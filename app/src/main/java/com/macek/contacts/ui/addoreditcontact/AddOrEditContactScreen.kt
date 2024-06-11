@@ -1,4 +1,4 @@
-package com.macek.contacts.ui.addordeditcontact
+package com.macek.contacts.ui.addoreditcontact
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable

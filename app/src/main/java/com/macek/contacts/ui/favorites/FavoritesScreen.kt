@@ -120,7 +120,7 @@ private fun FavoritesScreen(
             }
         }
 
-        if (state.showAddFavoriteDialog) {
+        if (state.showAddFavoritesDialog) {
             AddFavoritesDialog(
                 items = state.addFavoriteContacts,
                 saveFavoritesButtonEnabled = state.saveFavoritesButtonEnabled,
@@ -230,7 +230,7 @@ private fun FavoritesScreenPreview() {
                 )
             ),
             addFavoriteContacts = emptyList(),
-            showAddFavoriteDialog = false,
+            showAddFavoritesDialog = false,
             addMoreContactsButtonVisible = true
         ),
         onContactClick = {},

@@ -31,7 +31,7 @@ fun Contact.toNewContactEntity() =
 
 fun Contact.toAddFavoriteContact() =
     AddFavoriteContact(
-        id,
-        fullName,
-        false
+        id = id,
+        fullName = fullName,
+        isSelected = false
     )
