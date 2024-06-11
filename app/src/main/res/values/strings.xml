@@ -11,4 +11,12 @@
     <string name="favorite_contacts_pattern">Favorite contacts: %d</string>
     <string name="add_more_favorites">Add more favorites</string>
     <string name="save_favorites">Save favorites</string>
+
+    <string name="add_new_contact">Add new contact</string>
+    <string name="edit_contact">Edit contact</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="telephone_number">Telephone number</string>
+    <string name="save_contact">Save contact</string>
+    <string name="save_changes">Save changes</string>
 </resources>

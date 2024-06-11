@@ -1,7 +1,6 @@
 package com.macek.contacts.ui.contacts
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -83,39 +83,44 @@ private fun ContactsScreen(
     ContactsTheme {
         Surface {
             Box(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(ContactsAppTheme.spacing.xl),
-                ) {
-                    TextField(
-                        modifier = Modifier.fillMaxWidth(),
-                        value = state.searchValue,
-                        onValueChange = onSearchTextChange,
-                        maxLines = 1,
-                        placeholder = {
-                            Text(text = stringResource(id = R.string.search_contacts))
-                        }
-                    )
-                    Spacer(modifier = Modifier.height(ContactsAppTheme.spacing.l))
-                    if (state.contacts.isNotEmpty()) {
-                        LazyColumn {
-                            items(
-                                items = state.contacts,
-                                key = { it.id }
-                            ) {
-                                ContactSwipeableItem(
-                                    item = it,
-                                    onDelete = { onDeleteContact(it.id) },
-                                    onFavoriteChange = { onChangeFavoriteContact(it.id) },
-                                    onContactClick = { onContactClick(it.id) }
-                                )
+                if (state.isLoading) {
+                    CircularProgressIndicator()
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(ContactsAppTheme.spacing.xl),
+                    ) {
+                        TextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = state.searchValue,
+                            onValueChange = onSearchTextChange,
+                            maxLines = 1,
+                            placeholder = {
+                                Text(text = stringResource(id = R.string.search_contacts))
                             }
+                        )
+                        Spacer(modifier = Modifier.height(ContactsAppTheme.spacing.l))
+                        if (state.contacts.isNotEmpty()) {
+                            LazyColumn {
+                                items(
+                                    items = state.contacts,
+                                    key = { it.id }
+                                ) {
+                                    ContactSwipeableItem(
+                                        item = it,
+                                        onDelete = { onDeleteContact(it.id) },
+                                        onFavoriteChange = { onChangeFavoriteContact(it.id) },
+                                        onContactClick = { onContactClick(it.id) }
+                                    )
+                                }
+                            }
+                        } else {
+                            EmptyState(state.emptyStateTitle)
                         }
-                    } else {
-                        EmptyState(state.emptyStateTitle)
                     }
                 }
                 FloatingActionButton(
@@ -195,7 +200,6 @@ fun ContactSwipeBackground(
         modifier = Modifier
             .fillMaxSize()
             .padding(vertical = ContactsAppTheme.spacing.s)
-            .border(1.dp, Color.Red, RoundedCornerShape(20.dp))
             .clip(RoundedCornerShape(20.dp))
             .background(backgroundColor)
             .padding(ContactsAppTheme.spacing.s),

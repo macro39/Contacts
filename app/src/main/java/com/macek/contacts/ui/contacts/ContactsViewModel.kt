@@ -47,7 +47,7 @@ class ContactsViewModel @Inject constructor(
 
     private fun onChangeFavoriteContact(id: Int) {
         state.value.contacts.firstOrNull { it.id == id }?.let { contactItem ->
-            contactsRepository.saveContact(contactItem.copy(isFavorite = contactItem.isFavorite.not()))
+            contactsRepository.updateContact(contactItem.copy(isFavorite = contactItem.isFavorite.not()))
         }
     }
 
@@ -71,10 +71,11 @@ class ContactsViewModel @Inject constructor(
                     it.lastName.contains(state.searchValue.text, true) ||
                     it.phoneNumber.contains(state.searchValue.text, true)
             }
-            val emptyStateTitle = if (filteredContacts.isEmpty() && state.searchValue.text.isEmpty()) R.string.no_contacts_found_change_your_search_text else R.string.no_contacts_found_change_your_search_text
+            val emptyStateTitle = if (filteredContacts.isEmpty() && state.searchValue.text.isEmpty()) R.string.you_do_not_have_any_contacts else R.string.no_contacts_found_change_your_search_text
 
             this.state.emit(
                 state.copy(
+                    isLoading = false,
                     contacts = filteredContacts,
                     emptyStateTitle = context.getString(emptyStateTitle),
                 )

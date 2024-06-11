@@ -14,11 +14,19 @@ fun ContactEntity.toContact() =
 
 fun Contact.toContactEntity() =
     ContactEntity(
-        id,
-        firstName,
-        lastName,
-        phoneNumber,
-        isFavorite
+        id = id,
+        firstName = firstName,
+        lastName = lastName,
+        phoneNumber = phoneNumber,
+        isFavorite = isFavorite
+    )
+
+fun Contact.toNewContactEntity() =
+    ContactEntity(
+        firstName = firstName,
+        lastName = lastName,
+        phoneNumber = phoneNumber,
+        isFavorite = isFavorite
     )
 
 fun Contact.toAddFavoriteContact() =

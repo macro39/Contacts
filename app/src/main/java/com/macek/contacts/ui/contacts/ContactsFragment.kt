@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.macek.contacts.ui.addordeditcontact.INVALID_CONTACT_ID_ARG
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,10 +22,14 @@ class ContactsFragment : Fragment() {
             setContent {
                 ContactsScreen(
                     onAddContact = {
-                        // TODO implement
+                        findNavController().navigate(
+                            ContactsFragmentDirections.actionContactsFragmentToAddOrEditContactFragment(INVALID_CONTACT_ID_ARG)
+                        )
                     },
                     onShowContactDetail = {
-                        // TODO implement
+                        findNavController().navigate(
+                            ContactsFragmentDirections.actionContactsFragmentToAddOrEditContactFragment(it)
+                        )
                     }
                 )
             }
