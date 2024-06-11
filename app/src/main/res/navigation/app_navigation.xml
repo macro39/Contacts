@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/addOrEditContactFragment"
-        android:name="com.macek.contacts.ui.addordeditcontact.AddOrEditContactFragment">
+        android:name="com.macek.contacts.ui.addoreditcontact.AddOrEditContactFragment">
 
         <argument
             android:name="contactId"

@@ -1,4 +1,4 @@
-package com.macek.contacts.ui.addordeditcontact
+package com.macek.contacts.ui.addoreditcontact
 
 import android.os.Bundle
 import android.view.LayoutInflater

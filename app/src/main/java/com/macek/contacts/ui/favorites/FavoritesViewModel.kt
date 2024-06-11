@@ -37,7 +37,7 @@ class FavoritesViewModel @Inject constructor(
                 viewModelScope.launch {
                     state.emit(
                         state.value.copy(
-                            showAddFavoriteDialog = false,
+                            showAddFavoritesDialog = false,
                             saveFavoritesButtonEnabled = false,
                         )
                     )
@@ -54,7 +54,7 @@ class FavoritesViewModel @Inject constructor(
             state.emit(
                 state.value.copy(
                     addFavoriteContacts = contactsRepository.getContacts(isFavorite = false).first().map { it.toAddFavoriteContact() },
-                    showAddFavoriteDialog = true,
+                    showAddFavoritesDialog = true,
                     saveFavoritesButtonEnabled = false,
                 )
             )
@@ -87,7 +87,7 @@ class FavoritesViewModel @Inject constructor(
             contactsRepository.setFavorites(currentState.addFavoriteContacts.filter { it.isSelected }.map { it.id })
             state.emit(
                 currentState.copy(
-                    showAddFavoriteDialog = false,
+                    showAddFavoritesDialog = false,
                     addFavoriteContacts = emptyList(),
                     saveFavoritesButtonEnabled = false
                 )

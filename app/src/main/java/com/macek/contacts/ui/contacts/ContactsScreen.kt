@@ -129,7 +129,7 @@ private fun ContactsScreen(
                         .padding(ContactsAppTheme.spacing.xl),
                     onClick = { onAddContact() }
                 ) {
-                    Icon(Icons.Default.Add, contentDescription = null)
+                    Icon(imageVector = Icons.Default.Add, contentDescription = null)
                 }
             }
         }

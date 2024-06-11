@@ -16,7 +16,7 @@ data class State(
     val contacts: List<Contact> = emptyList(),
     val addFavoriteContacts: List<AddFavoriteContact> = emptyList(),
     val saveFavoritesButtonEnabled: Boolean = false,
-    val showAddFavoriteDialog: Boolean = false,
+    val showAddFavoritesDialog: Boolean = false,
     val addMoreContactsButtonVisible: Boolean = false,
 )
 
