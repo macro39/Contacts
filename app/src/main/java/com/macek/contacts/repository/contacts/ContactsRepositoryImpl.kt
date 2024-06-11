@@ -3,6 +3,7 @@ package com.macek.contacts.repository.contacts
 import com.macek.contacts.repository.contacts.model.Contact
 import com.macek.contacts.repository.contacts.model.toContact
 import com.macek.contacts.repository.contacts.model.toContactEntity
+import com.macek.contacts.repository.contacts.model.toNewContactEntity
 import com.macek.contacts.repository.db.dao.ContactDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +27,17 @@ class ContactsRepositoryImpl(
         }
     }
 
+    override fun getContact(id: Int): Flow<Contact?> = contactDao.getContact(id).map {
+        it?.toContact()
+    }
+
     override fun saveContact(contact: Contact) {
+        CoroutineScope(Dispatchers.IO).launch {
+            contactDao.upsert(contact.toNewContactEntity())
+        }
+    }
+
+    override fun updateContact(contact: Contact) {
         CoroutineScope(Dispatchers.IO).launch {
             contactDao.upsert(contact.toContactEntity())
         }

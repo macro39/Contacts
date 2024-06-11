@@ -13,6 +13,7 @@ interface ContactsViewModelInterface {
 }
 
 data class State(
+    val isLoading: Boolean = true,
     val searchValue: TextFieldValue = TextFieldValue(),
     val contacts: List<Contact> = emptyList(),
     val emptyStateTitle: String,
